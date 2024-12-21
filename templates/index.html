@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dictionary App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #007bff, #6c757d);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Roboto', sans-serif;
+        }
+        .container {
+            background: #fff;
+            color: #333;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            padding: 30px;
+            margin: 20px;
+        }
+        h1 {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+        .form-control {
+            border-radius: 20px;
+            padding: 15px;
+            font-size: 1rem;
+        }
+        .btn-primary {
+            border-radius: 20px;
+            font-size: 1rem;
+            padding: 10px 20px;
+            font-weight: bold;
+        }
+        #result .alert {
+            border-radius: 10px;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 576px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Thesaurus App</h1>
+        <p class="text-center">Quickly find the meaning of any word.</p>
+        <form id="wordForm" class="mt-4">
+            <div class="mb-3">
+                <input type="text" name="word" id="wordInput" class="form-control" placeholder="Enter a word..." required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Search</button>
+        </form>
+        <div id="result" class="mt-4"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $("#wordForm").submit(function(event) {
+            event.preventDefault();
+            const word = $("#wordInput").val();
+            $("#result").html(`<div class="text-center">Loading...</div>`); // Show loading message
+            $.post("/get-meaning", { word: word }, function(data) {
+                $("#result").html(""); // Clear previous results
+                if (typeof data === "object" && data.suggestion) {
+                    $("#result").html(
+                        `<div class="alert alert-warning">
+                            Did you mean <b>${data.suggestion}</b>?
+                        </div>`
+                    );
+                } else if (Array.isArray(data)) {
+                    data.forEach(item => {
+                        $("#result").append(`<div class="alert alert-success">${item}</div>`);
+                    });
+                } else {
+                    $("#result").html(`<div class="alert alert-danger">${data}</div>`);
+                }
+            }).fail(function() {
+                $("#result").html(
+                    `<div class="alert alert-danger">An error occurred. Please try again later.</div>`
+                );
+            });
+        });
+    </script>
+</body>
+</html>
