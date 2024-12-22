@@ -6,7 +6,7 @@
     </p>
 
   
-##Features 🌟<br>
+<h1>Features 🌟</h1><br>
 🔍 Word Search: Enter any word to get its meaning.<br>
 📝 Suggestions: If a word is misspelled, the app suggests the closest match.<br>
 📜 Multiple Meanings: Displays all possible meanings of a word.<br>
