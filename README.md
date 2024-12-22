@@ -6,3 +6,9 @@
     </p>
 
   
+Features 🌟
+🔍 Word Search: Enter any word to get its meaning.
+📝 Suggestions: If a word is misspelled, the app suggests the closest match.
+📜 Multiple Meanings: Displays all possible meanings of a word.
+📱 Mobile-Friendly: Fully responsive design for seamless use on mobile devices.
+🎨 User-Friendly Interface: Clean and intuitive design using Bootstrap.
