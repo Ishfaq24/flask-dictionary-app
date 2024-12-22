@@ -25,6 +25,5 @@ Data: JSON file for storing word meanings<br>
 
 <h4>How to Run 🚀</h4>
 Clone the repository:<br>
-git clone https://github.com/ishfaq24/flask-dictionary-app  
-Navigate to the project directory:<br>
+https://github.com/ishfaq24/flask-dictionary-app  
  
